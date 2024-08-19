@@ -1,9 +1,9 @@
 name = "secp256k1_gleam"
-version = "1.0.0"
+version = "1.0.1"
 
 description = "A Gleam wrapper for the secp256k1 library"
 repository = { type = "github", user = "gusinacio", repo = "secp256k1_gleam" }
-license = "MIT"
+licences = ["Apache-2.0"]
 
 # Fill out these fields if you intend to generate HTML documentation or publish
 # your project to the Hex package manager.

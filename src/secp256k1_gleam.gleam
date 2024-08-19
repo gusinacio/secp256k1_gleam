@@ -1,3 +1,4 @@
+import gleam/bit_array
 import gleam/result
 import secp256k1_gleam/error
 import secp256k1_gleam/result as my_result
@@ -12,6 +13,16 @@ pub fn sign(
 ) -> Result(Signature, error.Error) {
   use result <- result.try(internal_sign(message, secret_key))
   Ok(Signature(r: result.0, s: result.1, recovery_id_int: result.2))
+}
+
+pub fn to_compact(signature: Signature) -> BitArray {
+  let Signature(r: r, s: s, ..) = signature
+  <<r:bits, s:bits>>
+}
+
+pub fn to_string(signature: Signature) -> String {
+  let assert Ok(compact) = to_compact(signature) |> bit_array.to_string
+  "0x" <> compact
 }
 
 pub fn verify(
