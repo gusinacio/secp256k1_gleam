@@ -16,12 +16,17 @@ pub fn sign(
 }
 
 pub fn to_compact(signature: Signature) -> BitArray {
-  let Signature(r: r, s: s, ..) = signature
-  <<r:bits, s:bits>>
+  let Signature(r: r, s: s, recovery_id_int: recovery_id_int) = signature
+
+  let extra_bit = case recovery_id_int > 0 {
+    True -> <<0x1c>>
+    False -> <<0x1b>>
+  }
+  <<r:bits, s:bits, extra_bit:bits>>
 }
 
 pub fn to_string(signature: Signature) -> String {
-  let assert Ok(compact) = to_compact(signature) |> bit_array.to_string
+  let compact = to_compact(signature) |> bit_array.base16_encode
   "0x" <> compact
 }
 

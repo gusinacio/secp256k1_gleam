@@ -1,5 +1,5 @@
 name = "secp256k1_gleam"
-version = "1.0.1"
+version = "1.0.3"
 
 description = "A Gleam wrapper for the secp256k1 library"
 repository = { type = "github", user = "gusinacio", repo = "secp256k1_gleam" }
